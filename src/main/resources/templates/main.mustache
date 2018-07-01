@@ -9,8 +9,7 @@
 
 <div>
     <b>Добавить новый счет</b>
-    <form method="post" action="add">
-        <!--<input type="text" name="user" placeholder="Введите имя пользователя">-->
+    <form method="post" action="addAccount">
         <input type="text" name="currency" placeholder="Введите валюту">
         <input type="number" name="sum" placeholder="Введите сумму">
         <input type="hidden" name="_csrf" value="{{_csrf.token}}">
@@ -30,6 +29,7 @@
         <strong>{{user.getUsername}}</strong>
         <span>{{currency}}</span>
         <i>{{sum}}</i>
+        <a href="transactions?id={{id}}">Посмотреть</a>
     </div>
 
 {{/accounts}}

@@ -23,31 +23,31 @@ public class AccountController {
     }
 
     @GetMapping("/main")
-    public String main(Map<String, Object> model){
-        Iterable<Account> accounts = accountRepository.findAll();
+    public String main(@AuthenticationPrincipal User user, Map<String, Object> model){
+        Iterable<Account> accounts = accountRepository.findByUser(user);
         model.put("accounts", accounts);
         return "main";
     }
 
-    @PostMapping("add")
+    @PostMapping("addAccount")
     public String addAccount(@AuthenticationPrincipal User user,
             @RequestParam String currency, @RequestParam long sum, Map<String, Object> model){
         Account account = new Account(sum, currency, user);
         accountRepository.save(account);
-        Iterable<Account> accounts = accountRepository.findAll();
+        Iterable<Account> accounts = accountRepository.findByUser(user);
         model.put("accounts", accounts);
         return "main";
     }
 
     @PostMapping ("filter")
-    public String filter(@RequestParam String filter, Map<String, Object> model){
+    public String filter(@AuthenticationPrincipal User user, @RequestParam String filter, Map<String, Object> model){
         Iterable<Account> accounts;
 
         if (filter != null && !filter.isEmpty()) {
-           accounts = accountRepository.findByUser(filter);
+           accounts = accountRepository.findByCurrencyAndUser(filter, user);
         }
         else{
-            accounts = accountRepository.findAll();
+            accounts = accountRepository.findByUser(user);
         }
         model.put("accounts", accounts);
         return "main";

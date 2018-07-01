@@ -1,6 +1,8 @@
 package com.example.marafet.model;
 
 import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 public class Account {
@@ -15,6 +17,10 @@ public class Account {
     @JoinColumn(name = "user_id")
     private User user;
     private String currency;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<Transaction> transactionList = new LinkedList<>();
+
 
     public Account() {
     }
@@ -58,6 +64,14 @@ public class Account {
         this.currency = currency;
     }
 
+    public List<Transaction> getTransactionList() {
+        return transactionList;
+    }
+
+    public void setTransactionList(List<Transaction> transactionList) {
+        this.transactionList = transactionList;
+    }
+
     //    @ManyToOne
 //    @JoinColumn(name = "user_id")
 //    private CustomUser customUser;
@@ -70,8 +84,6 @@ public class Account {
 //    @JoinColumn(name = "currency_id")
 //    private Currency currency;
 //
-//    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-//    private List<Transaction> transactionList = new LinkedList<>();
 
 
 }
