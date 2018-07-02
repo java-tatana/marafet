@@ -16,6 +16,7 @@ public class Transaction {
     private String date;
     private int sum;
     private String description;
+    private String filename;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
@@ -34,6 +35,14 @@ public class Transaction {
         this.sum = sum;
         this.description = description;
         this.account = account;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     public Long getId() {
