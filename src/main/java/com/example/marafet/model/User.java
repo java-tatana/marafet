@@ -34,7 +34,15 @@ public class User implements UserDetails {
     public User() {
     }
 
-//    @ManyToMany(mappedBy = "customUserList")
+    public User(String username, String email, String password, boolean active, Set<Role> roles) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.active = active;
+        this.roles = roles;
+    }
+
+    //    @ManyToMany(mappedBy = "customUserList")
 //    private List<Profile> profileList = new LinkedList<>();
 
 
@@ -109,5 +117,13 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
     }
 }

@@ -4,16 +4,17 @@ import com.example.marafet.model.Account;
 import com.example.marafet.model.User;
 import com.example.marafet.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.Map;
 
 @Controller
+@Transactional
 public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
@@ -43,13 +44,23 @@ public class AccountController {
 
     @PostMapping("addAccount")
     public String addAccount(@AuthenticationPrincipal User user,
-            @RequestParam String currency, @RequestParam long sum, Map<String, Object> model){
+            @RequestParam String currency, @RequestParam long sum, Model model){
         Account account = new Account(sum, currency, user);
         accountRepository.save(account);
         Iterable<Account> accounts = accountRepository.findByUser(user);
-        model.put("accounts", accounts);
+        model.addAttribute("accounts", accounts);
         return "main";
     }
+
+    @GetMapping ("/main/{account}")
+    public String delete(@PathVariable Account account,
+                         @AuthenticationPrincipal User user,
+                         Model model){
+        accountRepository.delete(account);
+        model.addAttribute("accounts", accountRepository.findByUser(user));
+        return "redirect:/main";
+    }
+
 
 
 }

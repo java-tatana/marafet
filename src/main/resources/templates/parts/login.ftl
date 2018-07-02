@@ -14,3 +14,16 @@
          <input type="submit" value="Sign Out"/>
      </form>
 </#macro>
+
+
+<#macro registration>
+
+<form method="post" action="/registration">
+    <strong>${message?ifExists}</strong>
+    <div><label> User Name : <input type="text" name="username"/> </label></div>
+    <div><label> Password: <input type="password" name="password"/> </label></div>
+    <div><label> Email: <input type="text" name="email"/> </label></div>
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <div><input type="submit" value="Sign In"/></div>
+</form>
+</#macro>

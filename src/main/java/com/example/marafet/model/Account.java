@@ -13,7 +13,7 @@ public class Account {
     private Long id;
     private long sum;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
     private String currency;
@@ -72,10 +72,7 @@ public class Account {
         this.transactionList = transactionList;
     }
 
-    //    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private CustomUser customUser;
-//
+
 //    @ManyToOne
 //    @JoinColumn(name = "profile_id")
 //    private Profile profile;

@@ -19,7 +19,7 @@
 
 <div>Список счетов</div>
 <form method="get" action="/main">
-    <input type="text" name="filter" value="${filter}">
+    <input type="text" name="filter" value="${filter?ifExists}">
     <button type="submit">Найти</button>
 </form>
 <#list accounts as account>
@@ -29,6 +29,7 @@
         <span>${account.currency}</span>
         <i>${account.sum}</i>
         <a href="/transactions/${account.id}">Посмотреть</a>
+        <a href="/main/${account.id}">Delete</a>
     </div>
 <#else>
 У вас не счетов

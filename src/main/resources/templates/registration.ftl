@@ -2,7 +2,6 @@
 <#import "parts/login.ftl" as l>
 
 <@c.page>
-${message}
 Добавить нового пользователя
-<l.login "/registration" />
+<@l.registration />
 </@c.page>

@@ -5,8 +5,10 @@ import com.example.marafet.model.User;
 import com.example.marafet.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -23,12 +25,15 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Map<String, Object> model){
+    public String addUser(User user, Model model){
         User userFromDB = userRepository.findByUsername(user.getUsername());
 
         if(userFromDB != null){
-            model.put("message", "Такой пользователь уже зарегистрирован");
+            model.addAttribute("message", "Такой пользователь уже зарегистрирован");
             return "registration";
+        }
+        else{
+            model.addAttribute("message", "");
         }
 
         user.setActive(true);
