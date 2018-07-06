@@ -1,17 +1,30 @@
 <#macro login path>
 
-<form action="${path}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
+<form action="/login" method="post">
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">User Name:</label>
+        <div class="col-sm-5">
+            <input type="text" name="username" class="form-control" placeholder="User name"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Password:</label>
+        <div class="col-sm-5">
+            <input type="password" name="password" class="form-control" placeholder="Password"/>
+        </div>
+    </div>
+
     <input type="hidden" name="_csrf" value="${_csrf.token}">
-    <div><input type="submit" value="Sign In"/></div>
+    <div class="mb-2"><button type="submit" class="btn btn-primary">Sign in</button></div>
+    <div class="mb-2"><a href="/registration">Зарегистрироваться</a></div>
+
 </form>
 </#macro>
 
 <#macro logout>
      <form action="/logout" method="post">
          <input type="hidden" name="_csrf" value="${_csrf.token}">
-         <input type="submit" value="Sign Out"/>
+         <button type="submit" class="btn btn-primary">Выйти</button>
      </form>
 </#macro>
 
@@ -19,11 +32,31 @@
 <#macro registration>
 
 <form method="post" action="/registration">
-    <strong>${message?ifExists}</strong>
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><label> Email: <input type="text" name="email"/> </label></div>
+    <#if message??>
+    <div class="alert alert-danger" role="alert">
+        ${message}
+    </div>
+    </#if>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">User Name:</label>
+        <div class="col-sm-5">
+            <input type="text" name="username" class="form-control" placeholder="User name"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Password:</label>
+        <div class="col-sm-5">
+            <input type="password" name="password" class="form-control" placeholder="Password"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Email:</label>
+        <div class="col-sm-5">
+            <input type="email" name="email" class="form-control" placeholder="Email"/>
+        </div>
+    </div>
     <input type="hidden" name="_csrf" value="${_csrf.token}">
-    <div><input type="submit" value="Sign In"/></div>
+    <div class="mb-2"><button type="submit" class="btn btn-primary">Зарегистрироваться</button></div>
 </form>
 </#macro>

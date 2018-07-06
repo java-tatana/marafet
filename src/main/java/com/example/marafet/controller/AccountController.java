@@ -44,8 +44,8 @@ public class AccountController {
 
     @PostMapping("addAccount")
     public String addAccount(@AuthenticationPrincipal User user,
-            @RequestParam String currency, @RequestParam long sum, Model model){
-        Account account = new Account(sum, currency, user);
+            @RequestParam String currency, @RequestParam long sum, @RequestParam String title, Model model){
+        Account account = new Account(title, sum, currency, user);
         accountRepository.save(account);
         Iterable<Account> accounts = accountRepository.findByUser(user);
         model.addAttribute("accounts", accounts);

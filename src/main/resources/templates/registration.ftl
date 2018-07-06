@@ -2,6 +2,8 @@
 <#import "parts/login.ftl" as l>
 
 <@c.page>
-Добавить нового пользователя
-<@l.registration />
+<div class="mb-4">
+    Добавить нового пользователя
+</div>
+    <@l.registration />
 </@c.page>

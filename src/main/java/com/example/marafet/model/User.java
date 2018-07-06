@@ -45,6 +45,9 @@ public class User implements UserDetails {
     //    @ManyToMany(mappedBy = "customUserList")
 //    private List<Profile> profileList = new LinkedList<>();
 
+    public boolean isAdmin(){
+        return roles.contains(Role.ADMIN);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

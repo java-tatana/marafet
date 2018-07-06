@@ -28,6 +28,10 @@ public class RegistrationController {
     public String addUser(User user, Model model){
         User userFromDB = userRepository.findByUsername(user.getUsername());
 
+        if(user.getUsername().equals("") || user.getEmail().equals("") || user.getPassword().equals("")){
+            model.addAttribute("message", "Заполните все поля для регистрации");
+            return "registration";
+        }
         if(userFromDB != null){
             model.addAttribute("message", "Такой пользователь уже зарегистрирован");
             return "registration";
@@ -35,7 +39,6 @@ public class RegistrationController {
         else{
             model.addAttribute("message", "");
         }
-
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         userRepository.save(user);

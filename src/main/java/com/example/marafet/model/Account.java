@@ -12,6 +12,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private long sum;
+    private String title;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -25,7 +26,8 @@ public class Account {
     public Account() {
     }
 
-    public Account(long sum, String currency, User user) {
+    public Account(String title, long sum, String currency, User user) {
+        this.title = title;
         this.sum = sum;
         this.currency = currency;
         this.user = user;
@@ -72,8 +74,15 @@ public class Account {
         this.transactionList = transactionList;
     }
 
+    public String getTitle() {
+        return title;
+    }
 
-//    @ManyToOne
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    //    @ManyToOne
 //    @JoinColumn(name = "profile_id")
 //    private Profile profile;
 //
