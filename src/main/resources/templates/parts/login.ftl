@@ -1,6 +1,13 @@
 <#macro login path>
 
 <form action="/login" method="post">
+
+     <#if message??>
+    <div class="alert alert-success" role="alert">
+        ${message}
+    </div>
+     </#if>
+
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">User Name:</label>
         <div class="col-sm-5">

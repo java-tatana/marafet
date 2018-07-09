@@ -14,22 +14,31 @@
     <div class="collapse" id="addTransaction">
         <div class="form-group mt-3">
             <form method="post" action="/transactions/${account.id}" class="form-inline" enctype="multipart/form-data">
-                <div class='input-group date col-sm-3'>
+                <div class='input-group date col-sm-2'>
                     <input type='date' name="date" class="form-control" placeholder="Выберите дату"/>
                 </div>
 
                 <input class="form-control" type="number" name="sum" placeholder="Введите сумму">
             <#--<input type="file" name="file">-->
+                <div class="form-group">
+                    <select name="category" class="custom-select ml-2">
+                        <option selected>Выберите категорию</option>
+                        <#list categories as category>
+                          <option value="${category}">${category}</option>
+                        </#list>
+                    </select>
+                </div>
                 <input class="form-control ml-2 col-sm-5" type="text" name="description" placeholder="Введите описание">
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
-                <button class="btn btn-primary ml-2" type="submit">Сохранить</button>
+                <button class="btn btn-primary mb-2" type="submit">Сохранить</button>
             </form>
+
         </div>
     </div>
 
 
-<#if transactions??>
-    <#assign a=0>
+    <#if transactions??>
+        <#assign a=0>
     <table class="table">
     <thead class="thead-dark">
         <#if transactions??>
@@ -54,11 +63,11 @@
     </#list>
     </table>
 
-<#else>
+    <#else>
    <div class="alert alert-info" role="alert">
        У вас нет транзакций для этого счета!
    </div>
-</#if>
+    </#if>
 
 
 <a href="/main">Назад</a>

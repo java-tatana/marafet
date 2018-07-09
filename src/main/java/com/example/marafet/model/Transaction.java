@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Transaction {
@@ -22,10 +23,10 @@ public class Transaction {
     @JoinColumn(name = "account_id")
     private Account account;
 
-//    @ManyToOne
-//    @JoinColumn(name = "category_id")
-//    private Category category;
-
+    @ElementCollection(targetClass = Category.class, fetch = FetchType.EAGER)
+    @CollectionTable(name =  "category", joinColumns = @JoinColumn(name = "transaction_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Category> category;
 
     public Transaction() {
     }
@@ -35,6 +36,14 @@ public class Transaction {
         this.sum = sum;
         this.description = description;
         this.account = account;
+    }
+
+    public Set<Category> getCategory() {
+        return category;
+    }
+
+    public void setCategory(Set<Category> category) {
+        this.category = category;
     }
 
     public String getFilename() {

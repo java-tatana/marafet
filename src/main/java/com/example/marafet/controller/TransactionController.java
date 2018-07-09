@@ -1,8 +1,6 @@
 package com.example.marafet.controller;
 
-import com.example.marafet.model.Account;
-import com.example.marafet.model.Transaction;
-import com.example.marafet.model.User;
+import com.example.marafet.model.*;
 import com.example.marafet.repository.AccountRepository;
 import com.example.marafet.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/transactions")
@@ -33,6 +35,7 @@ public class TransactionController {
                           Model model){
         Iterable<Transaction> transactions = account.getTransactionList();
         model.addAttribute("transactions", transactions);
+        model.addAttribute("categories", Category.values());
         return "/transactions";
     }
 
@@ -42,8 +45,13 @@ public class TransactionController {
                                   @RequestParam String description,
                                   @RequestParam int sum,
                                   @RequestParam String date,
+                                  @RequestParam String category,
                                   Model model) throws IOException {
-        Transaction transaction = new Transaction(date.substring(0,9), sum, description, account);
+
+        Category categoryE = Category.valueOf(category);
+        Transaction transaction = new Transaction(date.substring(0,10), sum, description, account);
+
+        transaction.setCategory(Collections.singleton(categoryE));
 
 //        if (file != null && !file.getOriginalFilename().isEmpty()){
 //            File uploadDir = new File(uploadPath);
@@ -61,6 +69,7 @@ public class TransactionController {
         transactionRepository.save(transaction);
         Iterable<Transaction> transactions = account.getTransactionList();
         model.addAttribute("transactions", transactions);
+        model.addAttribute("categories", Category.values());
         return "/transactions";
     }
 
