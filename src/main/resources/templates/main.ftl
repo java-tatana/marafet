@@ -16,12 +16,45 @@
    aria-controls="collapseExample">
     Добавить счет
 </a>
-<div class="collapse" id="addAccount">
+<div class="collapse <#if account??>show</#if>" id="addAccount">
     <div class="form-group mt-3">
         <form method="post" action="addAccount" class="form-inline">
-            <input class="form-control " type="text" name="title" placeholder="Введите название счета">
-            <input class="form-control ml-2" type="number" name="sum" placeholder="Введите сумму">
-            <input class="form-control ml-2" type="text" name="currency" placeholder="Введите валюту">
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <input class="form-control ${(titleError??)?string('is-invalid', '')}"
+                           type="text" name="title" placeholder="Введите название"
+                            value<#if account??>${account.title}</#if>/>
+                     <#if titleError??>
+                    <div class="invalid-feedback">
+                        ${titleError}
+                    </div>
+                     </#if>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <input class="form-control ${(sumError??)?string('is-invalid', '')} ml-2"
+                       type="number" name="sum" placeholder="Введите сумму"
+                        value<#if account??>${account.sum}</#if>/>
+                <#if sumError??>
+                <div class="invalid-feedback">
+                    Введите сумму
+                </div>
+                </#if>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <input class="form-control ml-2 ${(currencyError??)?string('is-invalid', '')}"
+                       type="text" name="currency" placeholder="Введите валюту"
+                        value<#if account??>${account.currency}</#if>/>
+                <#if currencyError??>
+                    <div class="invalid-feedback">
+                        ${currencyError}
+                    </div>
+                </#if>
+            </div>
+
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <button class="btn btn-primary ml-2" type="submit">Сохранить</button>
         </form>

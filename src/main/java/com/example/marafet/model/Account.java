@@ -1,6 +1,11 @@
 package com.example.marafet.model;
 
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,12 +16,19 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private long sum;
+
+    @NotBlank(message = "Введите название")
+    @Length(max = 100, message = "Длинна не может превышать 100 символов")
     private String title;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @NotBlank(message = "Введите валюту")
+    @Length(max = 4, message = "Длинна не может превышать 4 символа")
     private String currency;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
