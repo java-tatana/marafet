@@ -26,6 +26,7 @@ description varchar(255),
 filename varchar(255),
 sum integer not null,
 account_id bigint,
+type VARCHAR(100),
 primary key (id));
 
 create table user_role (

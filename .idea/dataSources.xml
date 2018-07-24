@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="marafetDB@localhost" uuid="1cc783b5-3bda-4ebb-9a80-5fda29915000">
+    <data-source source="LOCAL" name="marafetDB@localhost" uuid="862fd792-6332-448e-92a1-befc738f51e6">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>

@@ -36,6 +36,7 @@ public class TransactionController {
         Iterable<Transaction> transactions = account.getTransactionList();
         model.addAttribute("transactions", transactions);
         model.addAttribute("categories", Category.values());
+        model.addAttribute("types", TransType.values());
         return "/transactions";
     }
 
@@ -46,10 +47,12 @@ public class TransactionController {
                                   @RequestParam int sum,
                                   @RequestParam String date,
                                   @RequestParam String category,
+                                  @RequestParam String type,
                                   Model model) throws IOException {
 
         Category categoryE = Category.valueOf(category);
-        Transaction transaction = new Transaction(date.substring(0,10), sum, description, account);
+        TransType typeE = TransType.valueOf(type);
+        Transaction transaction = new Transaction(date.substring(0,10), sum, description, account, typeE);
 
         transaction.setCategory(Collections.singleton(categoryE));
 
@@ -70,6 +73,7 @@ public class TransactionController {
         Iterable<Transaction> transactions = account.getTransactionList();
         model.addAttribute("transactions", transactions);
         model.addAttribute("categories", Category.values());
+        model.addAttribute("types", TransType.values());
         return "/transactions";
     }
 

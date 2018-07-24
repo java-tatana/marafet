@@ -32,7 +32,7 @@
                 <#--</#if>-->
         </ul>
         <i class="fas fa-user-circle mr-3 fa-2x e-icon--light"></i>
-        <div class="navbar-text mr-3">name</div>
+        <div class="navbar-text mr-3">username</div>
         <@l.logout/>
 
     </div>

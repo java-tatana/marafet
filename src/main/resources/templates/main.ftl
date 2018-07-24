@@ -24,7 +24,7 @@
                 <div class="col-md-6 mb-3">
                     <input class="form-control ${(titleError??)?string('is-invalid', '')}"
                            type="text" name="title" placeholder="Введите название"
-                            value<#if account??>${account.title}</#if>/>
+                           value<#if account??>${account.title}</#if>/>
                      <#if titleError??>
                     <div class="invalid-feedback">
                         ${titleError}
@@ -36,7 +36,7 @@
             <div class="col-md-3 mb-3">
                 <input class="form-control ${(sumError??)?string('is-invalid', '')} ml-2"
                        type="number" name="sum" placeholder="Введите сумму"
-                        value<#if account??>${account.sum}</#if>/>
+                       value<#if account??>${account.sum}</#if>/>
                 <#if sumError??>
                 <div class="invalid-feedback">
                     Введите сумму
@@ -47,7 +47,7 @@
             <div class="col-md-3 mb-3">
                 <input class="form-control ml-2 ${(currencyError??)?string('is-invalid', '')}"
                        type="text" name="currency" placeholder="Введите валюту"
-                        value<#if account??>${account.currency}</#if>/>
+                       value<#if account??>${account.currency}</#if>/>
                 <#if currencyError??>
                     <div class="invalid-feedback">
                         ${currencyError}

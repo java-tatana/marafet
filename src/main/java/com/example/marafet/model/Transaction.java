@@ -19,6 +19,9 @@ public class Transaction {
     private String description;
     private String filename;
 
+    @Enumerated(EnumType.STRING)
+    private TransType type;
+
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
     private Account account;
@@ -31,11 +34,12 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(String date, int sum, String description, Account account) {
+    public Transaction(String date, int sum, String description, Account account, TransType type) {
         this.date = date;
         this.sum = sum;
         this.description = description;
         this.account = account;
+        this.type = type;
     }
 
     public Set<Category> getCategory() {
@@ -92,5 +96,13 @@ public class Transaction {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public TransType getType() {
+        return type;
+    }
+
+    public void setType(TransType type) {
+        this.type = type;
     }
 }

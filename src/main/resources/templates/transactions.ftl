@@ -13,7 +13,7 @@
 
     <div class="collapse" id="addTransaction">
         <div class="form-group mt-3">
-            <form method="post" action="/transactions/${account.id}" class="form-inline" enctype="multipart/form-data">
+            <form method="post" action="/transactions/${account.id}" class="form-inline">
                 <div class='input-group date col-sm-2'>
                     <input type='date' name="date" class="form-control" placeholder="Выберите дату"/>
                 </div>
@@ -28,6 +28,16 @@
                         </#list>
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <select name="type" class="custom-select ml-2">
+                        <option selected>Выберите тип</option>
+                        <#list types as type>
+                          <option value="${type}">${type}</option>
+                        </#list>
+                    </select>
+                </div>
+
                 <input class="form-control ml-2 col-sm-5" type="text" name="description" placeholder="Введите описание">
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                 <button class="btn btn-primary mb-2" type="submit">Сохранить</button>
@@ -47,17 +57,23 @@
             <th scope="col">Дата</th>
             <th scope="col">Сумма</th>
             <th scope="col">Описание</th>
+            <th scope="col">Тип</th>
         </tr>
         </thead>
         </#if>
     <#list transactions as transaction>
         <#assign a=a+1>
         <tbody>
-        <tr>
+        <#if transaction.type = "INCOME">
+            <tr class="table-success">
+        <#else>
+        <tr class="table-danger">
+        </#if>
             <th scope="row">${a}</th>
             <td>${transaction.date}</td>
             <td>${transaction.sum} ${account.currency}</td>
             <td>${transaction.description}</td>
+            <td>${transaction.type}</td>
         </tr>
         </tbody>
     </#list>
